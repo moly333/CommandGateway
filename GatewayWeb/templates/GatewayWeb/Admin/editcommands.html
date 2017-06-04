@@ -1,0 +1,39 @@
+{% extends 'GatewayWeb/gwbase.html' %}
+{% load staticfiles %}
+{% block title %}
+Edit Commands
+{% endblock title %}
+
+{% block gwcontents %}
+<div class="container text-left">
+    <div class="row">
+        <h1>コマンド一覧</h1>
+    </div>
+    <div class="row">
+        <a class="btn btn-default" href="{% url 'gatewayweb:createcommand' %}">コマンドを登録</a>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-md-offset-0.5" style="padding-top:5px;">
+            <table class="table table-striped">
+                <tr>
+                    <th>id</th>
+                    <th>コマンド名</th>
+                    <th>コマンドの説明</th>
+                    <th>コマンド</th>
+                    <th></th>
+                </tr>
+                {% for command in commands %}
+                <tr>
+                    <td>{{ command.id }}</td>
+                    <td>{{ command.name }}</td>
+                    <td>{{ command.detail }}</td>
+                    <td>{{ command.command }}</td>
+                    <td><a class="btn btn-default" href="{% url 'gatewayweb:updatecommand' pk=command.id %}">編集</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock gwcontents %}

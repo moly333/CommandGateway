@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block contents %}
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+                <span class="sr-only">メニュー</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <a href="{% url 'gatewayweb:index' %}" class="navbar-brand">GatewayWeb</a>
+                <li><a href="{% url 'gatewayweb:mypage' %}">Mypage</a></li>
+            </ul>
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    {% if request.user.is_superuser %}
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">AdminTools<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{% url 'gatewayweb:editcommands' %}">Edit Commands</a></li>
+                                <li><a href="{% url 'gatewayweb:editusers' %}">Edit Users</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    <li><a href="{% url 'gatewayweb:logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block gwcontents %}
+    {% endblock %}
+</div>
+{% endblock contents %}

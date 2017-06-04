@@ -1,0 +1,16 @@
+{% extends 'GatewayWeb/gwbase.html' %}
+
+{% block title %}
+INDEX
+{% endblock title %}
+
+{% block gwcontents %}
+<div class="container text-left">
+    <div class="row">
+        <h1>{{ request.user.username }}さんのマイページ</h1>
+    </div>
+    <div class="row">
+        <a class="btn btn-default" href="{% url 'gatewayweb:changepasswd' %}">パスワードを変更</a>
+    </div>
+</div>
+{% endblock gwcontents %}

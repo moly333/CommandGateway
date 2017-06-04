@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block contents %}
+
+<div class="container text-center">
+    <div class="row">
+        <h1>LOGIN</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <p class="bg-danger">
+            </p><br>
+            <form class="my-form" method="POST">
+                {% bootstrap_form form %}
+                {% csrf_token %}
+                <div class="form-group">
+                    <div>
+                        <input type="submit" class="btn btn-default" value="ログイン">
+                    </div>
+                </div>
+                <input type="hidden" name="next" value="{% if next %}{{next}}{% endif %}"/>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock contents %}

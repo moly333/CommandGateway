@@ -1,0 +1,48 @@
+{% extends 'GatewayWeb/gwbase.html' %}
+{% load staticfiles %}
+{% block title %}
+INDEX
+{% endblock title %}
+
+{% block gwcontents %}
+<div class="container text-left">
+    <div class="row row-eq-height">
+        <div class="col-xs-2 col-md-2">
+            <dl>
+                {% for command in commands %}
+                <dt>
+                    <button type="button" id="{{command.id}}"
+                            class="btn btn-default commandbtn" value="{{ command.name }}" >
+                        {{ command.name }}
+                    </button>
+                </dt>
+                <dd>{{ command.detail }}</dd>
+                {% endfor %}
+            </dl>
+        </div>
+        <div class="panel panel-default, col-xs-10 col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">コマンド出力結果</div>
+
+                <div id="cmdpanel" class="panel-body " >
+                    <pre class="pre-scrollable" id="cmdpre" style="background-color: black;">
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock gwcontents %}
+
+{% block afterbody %}
+    <script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>
+    <script type="text/javascript" src="{% static 'js/command.js' %}"></script>
+    <style type="text/css">
+        .pre-scrollable {
+            height: 500px;
+            max-height: 500px;
+            overflow-y: scroll;
+        }
+    </style>
+{% endblock afterbody %}

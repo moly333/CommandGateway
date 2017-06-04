@@ -1,0 +1,26 @@
+{% extends 'GatewayWeb/gwbase.html' %}
+{% load staticfiles %}
+{% block title %}
+ADD USER
+{% endblock title %}
+
+{% block gwcontents %}
+    <div class="container text-left">
+        <div class="row">
+            <h1>ユーザーを登録</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <form class="my-form" method="POST">
+                    {% bootstrap_form form %}
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div>
+                            <input type="submit" class="btn btn-default" value="登録">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock gwcontents %}

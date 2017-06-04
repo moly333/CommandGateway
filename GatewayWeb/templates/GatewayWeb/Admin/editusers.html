@@ -1,0 +1,40 @@
+{% extends 'GatewayWeb/gwbase.html' %}
+{% load staticfiles %}
+{% block title %}
+Edit Users
+{% endblock title %}
+
+{% block gwcontents %}
+<div class="container text-left">
+    <div class="row">
+        <h1>ユーザー一覧</h1>
+    </div>
+    <div class="row">
+        <a class="btn btn-default" href="{% url 'gatewayweb:createuser' %}">ユーザーを登録</a>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-md-offset-0.5" style="padding-top:5px;">
+            <table class="table table-striped">
+                <tr>
+                    <th>ユーザー名</th>
+                    <th>メールアドレス</th>
+                    <th>管理者区別</th>
+                    <th>有効区別</th>
+                    <th>登録日</th>
+                    <th></th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email}}</td>
+                    <td>{{ user.is_superuser }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td><a class="btn btn-default" href="{% url 'gatewayweb:updateuser' user.id %}">編集</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock gwcontents %}

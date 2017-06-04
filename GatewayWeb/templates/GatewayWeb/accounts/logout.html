@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<meta http-equiv="refresh" content="3;URL={% url 'gatewayweb:index' %}">
+{% endblock meta%}
+
+{% block title %}
+Logout
+{% endblock title %}
+
+{% block contents %}
+<div class="container text-center">
+    <div class="row">
+        <p>Logged out.</p>
+        <p class="text-info">3秒後にトップページにリダイレクトします.</p>
+    </div>
+</div>
+{% endblock contents %}
