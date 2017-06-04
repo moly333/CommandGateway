@@ -12,4 +12,4 @@ class UpdateCommand(UserPassesTestMixin, UpdateView):
     raise_exception = True
 
     def test_func(self):
-        return self.request.user.is_superuser()
+        return self.request.user.is_superuser

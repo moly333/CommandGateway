@@ -2,6 +2,7 @@ from channels import Group
 import json
 from GatewayWeb.models.Command import *
 from django.core.exceptions import ObjectDoesNotExist
+import django.utils.html as dhtml
 import subprocess
 
 Executing = False
@@ -33,7 +34,7 @@ def ws_message(message):
         }
 
         for line in get_lines(command=cmd.command):
-            cmddict['cmdline'] = line.decode('utf-8')
+            cmddict['cmdline'] = dhtml.escape(line.decode('utf-8'))
             Group("terminal").send({
                 "text": json.dumps(cmddict),
             })
