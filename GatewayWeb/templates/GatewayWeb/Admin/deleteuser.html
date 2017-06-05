@@ -1,23 +1,24 @@
 {% extends 'GatewayWeb/gwbase.html' %}
 {% load staticfiles %}
 {% block title %}
-UPDATE COMMAND
+DELETE USER
 {% endblock title %}
 
 {% block gwcontents %}
     <div class="container text-left">
         <div class="row">
-            <h1>コマンドを編集</h1>
+            <h1>ユーザーを削除</h1>
+        </div>
+        <div class="row">
+            <h2>{{ object.username }}を本当に削除しますか?</h2>
         </div>
         <div class="row">
             <div class="col-md-5">
                 <form class="my-form" method="POST">
-                    {% bootstrap_form form %}
                     {% csrf_token %}
                     <div class="form-group">
                         <div>
-                            <input type="submit" class="btn btn-success" value="登録">
-                            <a class="btn btn-danger" href="{% url 'gatewayweb:deletecommand' pk=object.id %}">削除</a>
+                            <input type="submit" class="btn btn-danger"  value="削除">
                         </div>
                     </div>
                 </form>

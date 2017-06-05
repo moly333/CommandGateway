@@ -18,6 +18,15 @@ def get_lines(command):
         if not line and proc.poll() is not None:
             break
 
+def send_cmd(cmdline, status):
+    cmddict = {
+        'cmdline': cmdline,
+        'status': status,
+    }
+    Group("terminal").send({
+        "text": json.dumps(cmddict),
+    })
+
 
 def ws_message(message):
     # ASGI WebSocket packet-received and send-packet message types
@@ -28,24 +37,11 @@ def ws_message(message):
         Executing = True
         cmd = Command.objects.get(id=data['id'])
 
-        cmddict = {
-            'cmdline': '',
-            'status': True,
-        }
-
         for line in get_lines(command=cmd.command):
-            cmddict['cmdline'] = dhtml.escape(line.decode('utf-8'))
-            Group("terminal").send({
-                "text": json.dumps(cmddict),
-            })
+            send_cmd(dhtml.escape(line.decode('utf-8')), True)
 
         Executing = False
-        cmddict['cmdline'] = '[*] Exec end'
-        cmddict['status'] = False
-
-        Group("terminal").send({
-            "text": json.dumps(cmddict),
-        })
+        send_cmd(dhtml.escape('[*] Exec end'), False)
 
     except ObjectDoesNotExist:
         Executing = False
@@ -59,13 +55,7 @@ def ws_add(message):
     message.reply_channel.send({"accept": True})
     # Add them to the chat group
     Group("terminal").add(message.reply_channel)
-    cmddict = {
-        'cmdline': '',
-        'status': Executing,
-    }
-    Group("terminal").send({
-        "text": json.dumps(cmddict),
-    })
+    send_cmd(dhtml.escape(''), Executing)
 
 # Connected to websocket.disconnect
 def ws_disconnect(message):

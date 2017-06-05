@@ -17,6 +17,7 @@ UPDATE USER
                     <div class="form-group">
                         <div>
                             <input type="submit" class="btn btn-default" value="登録">
+                            <a class="btn btn-danger" href="{% url 'gatewayweb:deleteuser' pk=object.id %}">削除</a>
                         </div>
                     </div>
                 </form>
