@@ -18,14 +18,15 @@ def get_lines(command):
         if not line and proc.poll() is not None:
             break
 
-def send_cmd(cmdline, status):
+
+def send_cmd(cmdline, status, immediately=True):
     cmddict = {
         'cmdline': cmdline,
         'status': status,
     }
     Group("terminal").send({
         "text": json.dumps(cmddict),
-    })
+    }, immediately=immediately)
 
 
 def ws_message(message):
