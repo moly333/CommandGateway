@@ -1,7 +1,7 @@
 $(function() {
     // When we're using HTTPS, use WSS too.
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var cmdsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + '/terminal/');
+    var cmdsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.hostname + ':8443/terminal/');
     $('.commandbtn').prop('disabled', true);
     $('.commandbtn').on('click', function(event) {
     	$('.commandbtn').prop('disabled', true);
