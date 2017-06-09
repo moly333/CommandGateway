@@ -5,7 +5,6 @@ $(function() {
     $('.commandbtn').prop('disabled', true);
     $('.commandbtn').on('click', function(event) {
     	$('.commandbtn').prop('disabled', true);
-    	$("#cmdpre").empty();
     	var msg = {
     		id: $(this).attr("id"),
     	};
