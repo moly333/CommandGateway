@@ -36,6 +36,7 @@ def ws_message(message):
     try:
         Executing = True
         cmd = Command.objects.get(id=data['id'])
+        send_cmd(dhtml.escape('[*]' + cmd.name + ' start'), True)
 
         for line in get_lines(command=cmd.command):
             send_cmd(dhtml.escape(line.decode('utf-8')), True)
